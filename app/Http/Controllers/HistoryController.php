@@ -7,14 +7,12 @@ use App\Models\History;
 
 class HistoryController extends Controller
 {
-    // Hiển thị danh sách lịch sử
     public function index()
     {
         $history = History::all();
         return response()->json($history);
     }
 
-    // Hiển thị chi tiết một lịch sử
     public function show($id)
     {
         $history = History::find($id);
@@ -26,7 +24,6 @@ class HistoryController extends Controller
         return response()->json($history);
     }
 
-    // Tạo mới một lịch sử
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -43,7 +40,6 @@ class HistoryController extends Controller
         return response()->json(['message' => 'History created successfully', 'history' => $history], 201);
     }
 
-    // Xóa một lịch sử
     public function destroy($id)
     {
         $history = History::find($id);
@@ -55,5 +51,30 @@ class HistoryController extends Controller
         $history->delete();
 
         return response()->json(['message' => 'History deleted successfully']);
+    }
+
+    public function findByUserId($user_id)
+    {
+        $histories = History::where('user_id', $user_id)->get();
+    
+        if ($histories->isEmpty()) {
+            return response()->json(['message' => 'No histories found for this user'], 404);
+        }
+    
+        $movies = [];
+        $movieController = new MovieController();
+    
+        foreach ($histories as $history) {
+            $movieResponse = $movieController->show($history->movie_id);
+            if ($movieResponse->getStatusCode() === 200) {
+                $movies[] = json_decode($movieResponse->getContent(), true);
+            }
+        }
+    
+        if (empty($movies)) {
+            return response()->json(['message' => 'No movies found for this user'], 404);
+        }
+    
+        return response()->json($movies);
     }
 }

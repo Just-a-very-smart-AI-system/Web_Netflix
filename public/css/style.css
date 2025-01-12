@@ -148,9 +148,11 @@ body {
   cursor: pointer;
   transition: color 0.3s ease-in-out;
 }
+
 .heart-btn:hover{
   transform: scale(1.2); /* Phóng to khi hover */
 }
+
 .heart-btn::before {
   content: '\2661'; /* Unicode cho trái tim rỗng */
   color: white;
@@ -160,6 +162,10 @@ body {
 .heart-btn:hover::before {
   content: '\2665'; /* Unicode cho trái tim đầy */
   color: red; /* Đổi màu đỏ khi hover */
+}
+.heart-btn.favorite::before {
+  content: '\2665'; /* Unicode cho trái tim đầy */
+  color: red;
 }
 
 

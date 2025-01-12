@@ -11,13 +11,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        // foreach ($users as $user) {
-        //     if (!Hash::needsRehash($user->password)) {
-        //         // Mã hóa lại nếu mật khẩu chưa dùng Bcrypt
-        //         $user->password = Hash::make($user->password);
-        //         $user->save();
-        //     }
-        // }
         return response()->json($users);
     }
 
@@ -57,8 +50,9 @@ class UserController extends Controller
         if (!$newUser) {
             return response()->json(['message' => 'Failed to create User'], 500);
         }
-    
-        return response()->json(['message' => 'User created successfully', 'newUser' => $newUser], 201);
+        $token = JwtController::createToken($user);
+        return response()->json(['message' => 'User created successfully', 'token' => $token]);
+
     }
     
 
@@ -93,7 +87,25 @@ class UserController extends Controller
         if ($validatedData['password'] !== $user->password) {
             return response()->json(['message' => 'Invalid password'], 401);
         }
-
-        return response()->json(['message' => 'Login successful', 'user' => $user]);
+        $token = JwtController::createToken($user);
+        return response()->json(['message' => 'Login successful', 'token' => $token]);
     }
+    // public function logout(Request $request)
+    // {
+    //     $token = $request->header('Authorization'); 
+    //     $token = str_replace('Bearer ', '', $token);
+
+    //     if (!$token) {
+    //         return response()->json(['message' => 'Token not provided'], 400);
+    //     }
+
+    //     $result = JwtController::blacklistToken($token);
+
+    //     if (!$result) {
+    //         return response()->json(['message' => 'Invalid token'], 401);
+    //     }
+
+    //     return response()->json(['message' => 'Logout successful']);
+    // }
+
 }

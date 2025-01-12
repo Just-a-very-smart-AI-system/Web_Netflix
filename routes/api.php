@@ -26,22 +26,24 @@ Route::prefix('categories')->group(function () {
     Route::get('/findId/{id}', [CategoryController::class, 'show']);      // Lấy chi tiết danh mục
     Route::post('/create', [CategoryController::class, 'store']);        // Tạo mới danh mục
     Route::put('/update/{id}', [CategoryController::class, 'update']);    // Cập nhật danh mục
-    Route::delete('/delete/{id}', [CategoryController::class, 'destroy']);// Xóa danh mục
+    Route::delete('/delete', [CategoryController::class, 'destroy']);// Xóa danh mục
 });
 
 // API Routes cho history
 Route::prefix('history')->group(function () {
-    Route::get('/all', [HistoryController::class, 'index']);          // Lấy danh sách lịch sử
+    Route::get('/all', [HistoryController::class, 'index']);  
+    Route::get('/user/{id}', [HistoryController::class, 'findByUserId']);      // Lấy danh sách lịch sử
     Route::get('/findId/{id}', [HistoryController::class, 'show']);       // Lấy chi tiết lịch sử
     Route::post('/create', [HistoryController::class, 'store']);         // Tạo mới lịch sử
     Route::delete('/delete/{id}', [HistoryController::class, 'destroy']); // Xóa lịch sử
 });
 // API Routes cho favorites
 Route::prefix('favorites')->group(function () {
-    Route::get('/all', [FavoriteController::class, 'index']);          // Lấy danh sách yêu thích
+    Route::get('/all', [FavoriteController::class, 'index']);    
+    Route::get('/user/{id}', [FavoriteController::class, 'findByUserId']);      // Lấy danh sách yêu thích
     Route::get('/findId/{id}', [FavoriteController::class, 'show']);      // Lấy chi tiết yêu thích
     Route::post('/create', [FavoriteController::class, 'store']);        // Tạo mới yêu thích
-    Route::delete('/delete/{id}', [FavoriteController::class, 'destroy']); // Xóa yêu thích
+    Route::delete('/delete', [FavoriteController::class, 'destroy']); // Xóa yêu thích
 });
 
 // API Routes cho users
@@ -49,6 +51,7 @@ Route::prefix('users')->group(function () {
     Route::get('/all', [UserController::class, 'index']);              // Lấy danh sách người dùng
     Route::get('/findId/{id}', [UserController::class, 'show']);        // Lấy chi tiết người dùng
     Route::post('/login', [UserController::class, 'login']);      //Login
+    Route::post('/logout', [UserController::class, 'logout']);      //Logout
     Route::post('/create', [UserController::class, 'store']);          // Tạo mới người dùng
     Route::put('/update/{id}', [UserController::class, 'update']);      // Cập nhật thông tin người dùng
     Route::delete('/delete/{id}', [UserController::class, 'destroy']);  // Xóa người dùng

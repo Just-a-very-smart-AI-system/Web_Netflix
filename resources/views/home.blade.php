@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet">
+    <script>
+        window.onload = function() {
+        loadMovies();  // Gọi hàm loadMovies ngay khi tải trang
+    };
+  </script>
 </head>
 <body>
 <header>
@@ -179,6 +184,25 @@
     </div>
     <div id="western" class="movies__container">
         <!-- Western Movies List Here -->
+    </div>
+    <div class="showcase-content" style="height: 250px; margin: auto;">
+        <h1>My List</h1>
+    </div>
+    <div class="netflixOriginals">
+        <div class="original__header">
+            <h2 class="headings">FAVORITE</h2>
+        </div>
+        <div id="favorite"  class="original__movies" style="width: max-content">
+            <!-- FAVORITE Movies List Here -->
+        </div>
+    </div>
+    <div class="netflixOriginals">
+        <div class="original__header">
+            <h2 class="headings">HISTORY</h2>
+        </div>
+        <div id="my_history"  class="original__movies" style="width: max-content">
+            <!-- HISTORY Movies List Here -->
+        </div>
     </div>
 </main>
 
