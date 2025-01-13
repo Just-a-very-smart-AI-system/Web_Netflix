@@ -31,13 +31,23 @@ class HistoryController extends Controller
             'user_id' => 'required|integer|exists:user,id',
         ]);
 
+        // Kiểm tra xem bản ghi đã tồn tại chưa
+        $exists = History::where('movie_id', $validatedData['movie_id'])
+            ->where('user_id', $validatedData['user_id'])
+            ->delete();
+
+
+        // Nếu chưa tồn tại, thêm mới
         $history = History::create($validatedData);
 
         if (!$history) {
             return response()->json(['message' => 'Failed to create history'], 500);
         }
 
-        return response()->json(['message' => 'History created successfully', 'history' => $history], 201);
+        return response()->json([
+            'message' => 'History created successfully',
+            'history' => $history
+        ], 201);
     }
 
     public function destroy($id)

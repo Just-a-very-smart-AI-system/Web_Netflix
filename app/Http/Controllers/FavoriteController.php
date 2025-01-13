@@ -31,17 +31,27 @@ class FavoriteController extends Controller
     {
         $validatedData = $request->validate([
             'movie_id' => 'required|integer|exists:movies,id',
-            'user_id' => 'required|integer|exists:user,id',
+            'user_id' => 'required|integer|exists:users,id',
         ]);
 
+        // Kiểm tra và xóa bản ghi cũ nếu tồn tại
+        Favorite::where('movie_id', $validatedData['movie_id'])
+            ->where('user_id', $validatedData['user_id'])
+            ->delete();
+
+        // Thêm bản ghi mới
         $favorite = Favorite::create($validatedData);
 
         if (!$favorite) {
             return response()->json(['message' => 'Failed to create Favorite'], 500);
         }
 
-        return response()->json(['message' => 'Favorite created successfully', 'favorite' => $favorite], 201);
+        return response()->json([
+            'message' => 'Favorite updated successfully',
+            'favorite' => $favorite
+        ], 201);
     }
+
 
     public function destroy(Request $request)
     {
