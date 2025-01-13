@@ -1,0 +1,101 @@
+# Enabling automatic previews for your environment
+previews:
+  generation: automatic
+
+# List all services *except* PostgreSQL databases here
+services:
+  # A web service on the PHP runtime for Laravel
+  - type: web
+    runtime: php
+    name: laravel-backend
+    repo: https://github.com/your-username/your-repository # Thay thế bằng link repo của bạn
+    numInstances: 1   # Điều chỉnh số lượng instances nếu cần
+    region: oregon # Bạn có thể chọn khu vực khác nếu cần
+    plan: free  # Thay đổi theo yêu cầu về mức độ sử dụng
+    branch: master  # Chọn branch chính của bạn (thường là master hoặc main)
+    buildCommand: |
+      composer install
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+    startCommand: "php artisan serve --host 0.0.0.0 --port 10000"
+    autoDeploy: true # Tự động deploy mỗi khi có thay đổi trên GitHub
+    maxShutdownDelaySeconds: 120 # Thời gian cho phép ứng dụng đóng một cách an toàn
+    domains: # Custom domains
+      - your-domain.com  # Thay thế bằng domain của bạn (nếu có)
+    envVars: # Môi trường biến cấu hình
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://your-render-url.onrender.com  # Thay thế bằng URL render của bạn sau khi deploy
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: <host của database>  # Thay bằng host database thật (planetscale hoặc database trên render)
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: netflax
+      - key: DB_USERNAME
+        value: user
+      - key: DB_PASSWORD
+        value: 1234
+      - key: CACHE_DRIVER
+        value: database
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: MAIL_MAILER
+        value: smtp  # Bạn có thể cấu hình mail nếu cần
+      - key: MAIL_HOST
+        value: smtp.mailtrap.io  # Cấu hình mail server nếu cần
+      - key: MAIL_PORT
+        value: 2525
+      - key: MAIL_USERNAME
+        value: your-mailtrap-username  # Thay thế với username của bạn
+      - key: MAIL_PASSWORD
+        value: your-mailtrap-password  # Thay thế với password của bạn
+
+  # A MySQL database service
+  - type: mysql
+    name: laravel-database
+    plan: free # Chọn mức dịch vụ phù hợp
+    ipAllowList: 
+      - source: 0.0.0.0/0  # Cho phép truy cập từ bất kỳ đâu
+    envVars: 
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: <host của database> # Dùng host database nếu không chạy trên Render
+
+  # A Redis service (nếu sử dụng Redis cho cache/queue)
+  - type: redis
+    name: laravel-redis
+    plan: free  # Chọn mức dịch vụ phù hợp
+    ipAllowList:
+      - source: 0.0.0.0/0  # Cho phép truy cập từ bất kỳ đâu
+    envVars: 
+      - key: REDIS_HOST
+        value: your-redis-host # Thay thế với host Redis của bạn
+
+# Bạn cũng có thể sử dụng Cron job nếu cần chạy các tác vụ theo lịch (ví dụ: gửi email định kỳ, v.v.)
+cronJobs:
+  - type: cron
+    name: send-daily-report
+    runtime: php
+    schedule: "0 0 * * *" # Thực thi mỗi ngày vào lúc nửa đêm
+    buildCommand: "true"
+    startCommand: php artisan send:report
+    repo: https://github.com/your-username/your-repository
+
+# Environment groups (nếu cần thiết cho cấu hình các biến môi trường chung)
+envVarGroups:
+  - name: laravel-settings
+    envVars:
+      - key: APP_KEY
+        generateValue: true # Tạo giá trị APP_KEY tự động nếu chưa có
+      - key: APP_TIMEZONE
+        value: UTC
