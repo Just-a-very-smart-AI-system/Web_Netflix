@@ -1,21 +1,30 @@
-rm -rf /var/www/html
-ln -s /var/www/Web_Netflix/public /var/www/html
 #!/bin/bash
-# Cài đặt quyền truy cập cho thư mục storage và bootstrap/cache
+
+# Cấp quyền truy cập cho storage & bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Cài đặt lại Apache để trỏ vào thư mục public
-echo "<VirtualHost *:80>
+# Xóa thư mục mặc định và tạo symlink trỏ vào thư mục public của Laravel
+if [ -d "/var/www/Web_Netflix/public" ]; then
+    rm -rf /var/www/html
+    ln -s /var/www/Web_Netflix/public /var/www/html
+fi
+
+# Cấu hình lại Apache
+cat <<EOF > /etc/apache2/sites-available/laravel.conf
+<VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/html/public
-    <Directory /var/www/html/public>
+    DocumentRoot /var/www/html
+    <Directory /var/www/html>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
-</VirtualHost>" > /etc/apache2/sites-available/laravel.conf
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
 
-# Bật site mới
+# Kích hoạt site Laravel
 a2ensite laravel.conf
 a2dissite 000-default.conf
 a2enmod rewrite
