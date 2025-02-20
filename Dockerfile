@@ -23,27 +23,33 @@ WORKDIR /var/www/html
 # Sao chép toàn bộ project Laravel vào container
 COPY . .
 
+# Thiết lập DocumentRoot để trỏ vào thư mục public của Laravel
+RUN echo "<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/Web_Netflix/public
+    <Directory /var/www/Web_Netflix/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
+
+# Cấu hình Apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN a2enmod rewrite
+
 # Cấp quyền cho storage và bootstrap cache
 RUN chmod -R 777 storage bootstrap/cache
 
 # Cài đặt dependencies Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Tạo symbolic link cho storage (nếu cần)
-RUN php artisan storage:link || true
-
-# Tạo APP_KEY
-RUN php artisan key:generate
-
-# Migrate database (nếu cần)
-RUN php artisan migrate --force || true
-
-# Cấu hình Apache
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN a2enmod rewrite
+# Chạy sau khi container khởi động (entrypoint script)
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Mở cổng 80
 EXPOSE 80
 
-# Khởi động Apache
-CMD ["apache2-foreground"]
+# Khởi động container với script entrypoint
+CMD ["docker-entrypoint.sh"]
