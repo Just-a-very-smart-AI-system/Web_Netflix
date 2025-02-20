@@ -1,17 +1,16 @@
 #!/bin/bash
+echo "🔹 Đang kiểm tra thư mục..."
+ls -l /var/www/html
+ls -l /var/www/Web_Netflix/public
 
-# Cấp quyền truy cập cho storage & bootstrap/cache
+echo "🔹 Thiết lập quyền..."
 chmod -R 775 storage bootstrap/cache
 
-# Xóa thư mục mặc định và tạo symlink trỏ vào thư mục public của Laravel
-if [ -d "/var/www/Web_Netflix/public" ]; then
-    rm -rf /var/www/html
-    ln -s /var/www/Web_Netflix/public /var/www/html
-fi
+echo "🔹 Cấu hình Apache..."
+rm -rf /var/www/html
+ln -s /var/www/Web_Netflix/public /var/www/html
 
-# Cấu hình lại Apache
-cat <<EOF > /etc/apache2/sites-available/laravel.conf
-<VirtualHost *:80>
+echo "<VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/html
     <Directory /var/www/html>
@@ -19,13 +18,11 @@ cat <<EOF > /etc/apache2/sites-available/laravel.conf
         AllowOverride All
         Require all granted
     </Directory>
-    ErrorLog \${APACHE_LOG_DIR}/error.log
-    CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-EOF
+</VirtualHost>" > /etc/apache2/sites-available/laravel.conf
 
-# Kích hoạt site Laravel
 a2ensite laravel.conf
 a2dissite 000-default.conf
 a2enmod rewrite
 service apache2 restart
+
+echo "✅ Deploy hoàn tất!"
