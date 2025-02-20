@@ -20,7 +20,7 @@
 <body>
     <div class="main">
         <nav>
-            <span><img width="180" src="{{ asset('images/logo.svg') }}" alt=""></span>
+            <span><img width="180" src="{{asset('images/logo.svg') }}" alt=""></span>
             <div>
                 <button class="btn">Sign up</button>
                 <button class="btn btn-red-sn">Sign In</button>
@@ -78,9 +78,6 @@
                 </form>
             </div>
         </div>
-
-
-
 
         <div class="box"></div>
         <div class="hero" style="background-image: url('{{ asset('images/bg_img.jpg') }}');">

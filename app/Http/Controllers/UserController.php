@@ -41,21 +41,21 @@ class UserController extends Controller
                             ->first();
     
         if ($existingUser) {
-            return response()->json(['message' => 'User name or email already exists'], 409); // Mã HTTP 409: Conflict
+            return response()->json(['error' => 'User name or email already exists'], 409);
         }
+    
+        // Hash password trước khi lưu
+        $validatedData['password'] = Hash::make($validatedData['password']);
     
         // Tạo User mới
         $newUser = User::create($validatedData);
     
         if (!$newUser) {
-            return response()->json(['message' => 'Failed to create User'], 500);
+            return response()->json(['error' => 'Failed to create User'], 500);
         }
-        $token = JwtController::createToken($user);
-        return response()->json(['message' => 'User created successfully', 'token' => $token]);
-
+        return response()->json(['message' => 'User created successfully']);
     }
     
-
     // Xóa người dùng theo ID
     public function destroy($id)
     {
@@ -69,6 +69,7 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User deleted successfully']);
     }
+    
     public function login(Request $request)
     {
         $validatedData = $request->validate([
@@ -78,34 +79,15 @@ class UserController extends Controller
 
         $user = User::where('user_name', $validatedData['username'])
                     ->orWhere('email', $validatedData['username'])
+                    ->orWhere('email', $validatedData['password'])
                     ->first();
-
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['error' => 'User name or email not found'], 404);
+        }
+        if (!$user || !Hash::check($validatedData['password'], $user->password)) {
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        if ($validatedData['password'] !== $user->password) {
-            return response()->json(['message' => 'Invalid password'], 401);
-        }
-        $token = JwtController::createToken($user);
-        return response()->json(['message' => 'Login successful', 'token' => $token]);
+        return response()->json($user);
     }
-    // public function logout(Request $request)
-    // {
-    //     $token = $request->header('Authorization'); 
-    //     $token = str_replace('Bearer ', '', $token);
-
-    //     if (!$token) {
-    //         return response()->json(['message' => 'Token not provided'], 400);
-    //     }
-
-    //     $result = JwtController::blacklistToken($token);
-
-    //     if (!$result) {
-    //         return response()->json(['message' => 'Invalid token'], 401);
-    //     }
-
-    //     return response()->json(['message' => 'Logout successful']);
-    // }
-
 }

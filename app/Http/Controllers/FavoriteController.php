@@ -31,7 +31,7 @@ class FavoriteController extends Controller
     {
         $validatedData = $request->validate([
             'movie_id' => 'required|integer|exists:movies,id',
-            'user_id' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:user,id',
         ]);
 
         // Kiểm tra và xóa bản ghi cũ nếu tồn tại

@@ -20,6 +20,11 @@ const emailError = document.getElementById('emailError');
 const registerPasswordError = document.getElementById('registerPasswordError');
 const confirmPasswordError = document.getElementById('confirmPasswordError');
 
+// Định nghĩa các biến cục bộ cho các API
+const LOGIN_API_URL = 'http://127.0.0.1:8000/api/users/login';
+const REGISTER_API_URL = 'http://127.0.0.1:8000/api/users/create';
+const HOME_PAGE_API = 'http://127.0.0.1:8000/home';
+
 // Mở form đăng ký
 document.querySelector('.btn').addEventListener('click', () => {
     document.getElementById('loginFrame').classList.add('hidden');
@@ -42,6 +47,7 @@ closeRegisterBtn.addEventListener('click', () => {
     document.getElementById('registerFrame').classList.add('hidden');
 });
 
+
 // Kiểm tra đăng nhập
 loginForm.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -54,8 +60,22 @@ loginForm.addEventListener('submit', async function (e) {
     usernameError.style.display = 'none';
     passwordError.style.display = 'none';
 
+
+    // Kiểm tra nếu thông tin nhập vào trống
+    if (!username || !password) {
+        if (!username) {
+            usernameError.innerText = "Username không được để trống.";
+            usernameError.style.display = 'block';
+        }
+        if (!password) {
+            passwordError.innerText = "Mật khẩu không được để trống.";
+            passwordError.style.display = 'block';
+        }
+        return;
+    }
+
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/users/login', {
+        const response = await fetch(LOGIN_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,22 +86,30 @@ loginForm.addEventListener('submit', async function (e) {
         const data = await response.json();
 
         if (response.ok) {
-            // Xử lý khi đăng nhập thành công
             console.log("Đăng nhập thành công:", data);
             document.getElementById('loginFrame').classList.add('hidden');
             usernameInput.value = '';
             passwordInput.value = '';
-
+            redirectToHome(data.id);
         } else {
-            // Xử lý lỗi từ server
-            if (data.message.includes('User not found')) {
+            if (data.error === 'User name or email not found') {
+                usernameError.innerText = "Không tìm thấy username/email";
                 usernameError.style.display = 'block';
-            } else if (data.message.includes('Invalid password')) {
+            } else if (data.error === 'Invalid credentials') {
+                passwordError.innerText = "Sai mật khẩu";
+                passwordError.style.display = 'block';
+            } else {
+                // Xử lý lỗi khác từ API
+                passwordError.innerText = "Không thể đăng nhập";
                 passwordError.style.display = 'block';
             }
         }
     } catch (error) {
         console.error('Lỗi khi gọi API đăng nhập:', error);
+        const generalError = document.createElement('div');
+        generalError.id = 'notificationFrame';
+        generalError.innerText = 'Không thể kết nối đến máy chủ. Vui lòng thử lại sau.';
+        document.body.appendChild(generalError);
     }
 });
 
@@ -115,7 +143,7 @@ registerForm.addEventListener('submit', async function (e) {
     }
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/users/create', {
+        const response = await fetch(REGISTER_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -133,22 +161,13 @@ registerForm.addEventListener('submit', async function (e) {
             emailInput.value = '';
             registerPasswordInput.value = '';
             confirmPasswordInput.value = '';
+            redirectToHome(data.id);
         } else {
-            // Tạo khung thông báo lỗi
-            const errorMessage = data.message || "Có lỗi xảy ra.";
-            const frame = document.createElement('div');
-            frame.id = 'notificationFrame';
-            frame.style.color = 'red';
-            frame.style.marginTop = '10px';
-            frame.textContent = errorMessage;
-            // registerForm.appendChild(frame);
-            confirmPasswordError.innerText = "User name or email already exists";
+            confirmPasswordError.innerText = "Username hoặc email đã tồn tại";
             confirmPasswordError.style.display = 'block';
             // Hiển thị lỗi cụ thể
-            if (data.errors?.email) {
+            if (data.errors == 409) {
                 emailError.style.display = 'block';
-            }
-            if (data.errors?.user_name) {
                 userNameError.style.display = 'block';
             }
         }
@@ -164,3 +183,7 @@ registerForm.addEventListener('submit', async function (e) {
         registerForm.appendChild(frame);
     }
 });
+
+function redirectToHome(user_id) {
+    window.location.href = `${HOME_PAGE_API}?user_id=${user_id}`
+}

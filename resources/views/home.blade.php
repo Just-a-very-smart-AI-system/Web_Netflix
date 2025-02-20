@@ -17,6 +17,9 @@
     <script>
         window.onload = function() {
         loadMovies();  // Gọi hàm loadMovies ngay khi tải trang
+        // Sử dụng Blade để nhúng giá trị $user_id vào JavaScript
+        // const userId = @json(session('user_id'));
+        // console.log("User ID: ", userId);
     };
   </script>
 </head>
@@ -26,7 +29,7 @@
         <a href="#" target="_self">
             <img class="header__img" src="{{ asset('images/logo.png') }}" alt="logo">
         </a>
-        <a href="#" class="btn btn-rounded">Sign In</a>
+        <a href="#" class="btn btn-rounded" id="logoutBtn">Log out</a>
     </div>
 </header>
 <main>
@@ -246,6 +249,7 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" 
         crossorigin="anonymous"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+<!-- <script src="{{ asset('js/log_in.js') }}"></script> -->
 <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 </body>

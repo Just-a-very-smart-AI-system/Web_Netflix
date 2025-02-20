@@ -1,12 +1,22 @@
 let Favorites = []; // Biến toàn cục để lưu danh sách yêu thích
 let Histories = [];  // Biến toàn cục để lưu lịch sử
 let allMovies = [];
-const userId = 2;
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get('user_id');
+
+if (userId) {
+    console.log("User ID:", userId);
+    // Bạn có thể sử dụng userId ở đây
+} else {
+    console.log("Không tìm thấy user_id trong URL");
+}
+
 const apiUrlFavorite = `http://127.0.0.1:8000/api/favorites/user/${userId}`;
 const apiUrlHistory = `http://127.0.0.1:8000/api/history/user/${userId}`;
 const apiCreateFavorite = 'http://127.0.0.1:8000/api/favorites/create';
 const apiCreateHistory = 'http://127.0.0.1:8000/api/history/create';
-const apiDeleteFavorite = `http://127.0.0.1:8000/api/favorites/delete`
+const apiDeleteFavorite = `http://127.0.0.1:8000/api/favorites/delete`;
+const API_LOG_OUT = `http://127.0.0.1:8000/`;
 
 loadMovies();
 
@@ -41,6 +51,12 @@ window.onload = () => {
   getFavoritesByUserId(apiUrlHistory);
   main();
 }
+
+document.getElementById('logoutBtn').addEventListener('click', function(event) {
+  event.preventDefault(); // Ngăn chặn hành động mặc định
+  window.location.href = API_LOG_OUT;
+  userId = '';
+});
 
 async function loadMovies() {
   try {
@@ -130,8 +146,7 @@ const showMovies = async (movies, dom_element, path_type) => {
     // Truyền trực tiếp movie.id vào hàm handleMovieSelection
     playButton.addEventListener('click', () => {
       data = {movie_id : movie.id, user_id : userId};
-      createMyList(apiCreateHistory, data);        
-      // console.log(`Added movie ID: ${movie.id} to History`);
+      createMyList(apiCreateHistory, userId,  movie.id);        
       handleMovieSelection(movie.id)
     });
 
@@ -143,7 +158,6 @@ const showMovies = async (movies, dom_element, path_type) => {
     Favorites.forEach(f => {
       if(movie.id == f.id){
         heartButton.classList.add('favorite');
-        // console.log("add button:", movie.id);
       }
     });
 
@@ -152,8 +166,7 @@ const showMovies = async (movies, dom_element, path_type) => {
       if (!heartButton.classList.contains('favorite')) {
         heartButton.classList.add('favorite');
         console.log(`Added movie ID: ${movie.id} to wishlist`);
-        data = {movie_id : movie.id, user_id : userId};
-        createMyList(apiCreateFavorite, data);        
+        createMyList(apiCreateFavorite, userId,  movie.id);        
       } else {
         heartButton.classList.remove('favorite');
         console.log(`Removed movie ID: ${movie.id} from wishlist`);
@@ -222,7 +235,7 @@ function displayMoviesFromFavorites(movies, dom_element) {
     playButton.innerHTML = '&#9658;';
     playButton.addEventListener('click', () => {
       data = {movie_id : movie.id, user_id : userId};
-      createMyList(apiCreateHistory, data);        
+      createMyList(apiCreateHistory, userId,  movie.id);        
       console.log(`Added movie ID: ${movie.id} to wishlist`);
       handleMovieSelection(movie.id)
     });
@@ -241,7 +254,7 @@ function displayMoviesFromFavorites(movies, dom_element) {
         heartButton.classList.add('favorite');
         console.log(`Added movie ID: ${movie.id} to wishlist`);
         data = {movie_id : movie.id, user_id : userId};
-        createMyList(apiCreateFavorite, data);        
+        createMyList(apiCreateFavorite, userId,  movie.id );        
       } else {
         heartButton.classList.remove('favorite');
         console.log(`Removed movie ID: ${movie.id} from wishlist`);
@@ -258,7 +271,11 @@ function displayMoviesFromFavorites(movies, dom_element) {
   });
 }
 
-function createMyList(url, data) {
+function createMyList(url, userId, movieId) {
+  const data = {
+    user_id: userId,
+    movie_id: movieId
+  };
   console.log('Calling createMyList with:', url, data); // Thêm log
 
   return fetch(url, {
