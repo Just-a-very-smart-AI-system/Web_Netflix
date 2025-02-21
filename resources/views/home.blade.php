@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/favicon_package/apple-touch-icon.png') }}">
-    <link rel="android-chrome-512x512" href="{{ asset('images/favicon_package/android-chrome-512x512.png') }}">
-    <link rel="android-chrome-192x192" href="{{ asset('images/favicon_package/android-chrome-192x192.png') }}">
+    <link rel="icon" href="{{ secure_asset('images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ secure_asset('images/favicon_package/apple-touch-icon.png') }}">
+    <link rel="android-chrome-512x512" href="{{ secure_asset('images/favicon_package/android-chrome-512x512.png') }}">
+    <link rel="android-chrome-192x192" href="{{ secure_asset('images/favicon_package/android-chrome-192x192.png') }}">
     <title>Netflax</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
           crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet">
     <script>
@@ -27,7 +27,7 @@
 <header>
     <div class="container mb-3 my-4" style="top: 10px">
         <a href="#" target="_self">
-            <img class="header__img" src="{{ asset('images/logo.png') }}" alt="logo">
+            <img class="header__img" src="{{ secure_asset('images/logo.png') }}" alt="logo">
         </a>
         <a href="#" class="btn btn-rounded" id="logoutBtn">Log out</a>
     </div>
@@ -230,7 +230,7 @@
 <footer class="text-gray-600 body-font" style="background-color: #000; margin-bottom: -5rem; margin-top: 1rem; background: linear-gradient(360deg, transparent, rgba(37, 37, 37, 0.61), #111 );">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-            <img src="{{ asset('images/favicon_package/favicon-32x32.png') }}" alt="Footer logo" width="30" height="24" 
+            <img src="{{ secure_asset('images/favicon_package/favicon-32x32.png') }}" alt="Footer logo" width="30" height="24" 
                  class="d-inline-block align-text-top" style="height: 50px; width: 50px; border-radius: 5px;">
             <span class="ml-3 text-xl" style="color: antiquewhite; font-size: larger; font-weight: bold; text-decoration: none;">
                 Netflax
@@ -248,8 +248,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" 
         crossorigin="anonymous"></script>
-<script src="{{ asset('js/script.js') }}"></script>
-<!-- <script src="{{ asset('js/log_in.js') }}"></script> -->
+<script src="{{ secure_asset('js/script.js') }}"></script>
+<!-- <script src="{{ secure_asset('js/log_in.js') }}"></script> -->
 <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 </body>
