@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/favicon_package/apple-touch-icon.png') }}">
+    <link rel="icon" href="{{ secure_asset('images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ secure_asset('images/favicon_package/apple-touch-icon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ secure_asset('css/Log_in.css') }}">
@@ -20,7 +20,7 @@
 <body>
     <div class="main">
         <nav>
-            <span><img width="180" src="{{asset('images/logo.svg') }}" alt=""></span>
+            <span><img width="180" src="{{secure_asset('images/logo.svg') }}" alt=""></span>
             <div>
                 <button class="btn">Sign up</button>
                 <button class="btn btn-red-sn">Sign In</button>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="box"></div>
-        <div class="hero" style="background-image: url('{{ asset('images/bg_img.jpg') }}');">
+        <div class="hero" style="background-image: url('{{ secure_asset('images/bg_img.jpg') }}');">
             <h1>Unlimited movies, TV shows and more</h1>
             <p>Watch anywhere. Cancel anytime.</p>
             <span>Ready to watch? Enter your email to create or restart your membership.</span>
@@ -100,8 +100,8 @@
             <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
         </div>
         <div class="sec-img">
-            <img src="{{ asset('images/tv.jpg') }}" alt="">
-            <video src="{{ asset('images/video2.m4v') }}" autoplay loop muted></video>
+            <img src="{{ secure_asset('images/tv.jpg') }}" alt="">
+            <video src="{{ secure_asset('images/video2.m4v') }}" autoplay loop muted></video>
         </div>
     </section>
 
@@ -109,7 +109,7 @@
 
     <section class="first second">
         <div class="sec-img">
-            <img src="{{ asset('images/img3.jpg') }}" alt="">
+            <img src="{{ secure_asset('images/img3.jpg') }}" alt="">
         </div>
         <div>
             <h1>Download your shows to watch offline</h1>
@@ -125,8 +125,8 @@
             <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
         </div>
         <div class="sec-img3">
-            <img src="{{ asset('images/img1.jpg') }}" alt="">
-            <video src="{{ asset('images/video1.m4v') }}" autoplay loop muted></video>
+            <img src="{{ secure_asset('images/img1.jpg') }}" alt="">
+            <video src="{{ secure_asset('images/video1.m4v') }}" autoplay loop muted></video>
         </div>
     </section>
 
@@ -134,7 +134,7 @@
 
     <section class="first forth">
         <div class="sec-img">
-            <img src="{{ asset('images/img2.jpg') }}" alt="">
+            <img src="{{ secure_asset('images/img2.jpg') }}" alt="">
         </div>
         <div>
             <h1>Create profiles for kids</h1>
