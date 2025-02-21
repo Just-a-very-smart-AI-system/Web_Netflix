@@ -31,8 +31,9 @@ RUN a2ensite laravel.conf \
     && a2dissite 000-default.conf \
     && a2enmod rewrite
 
-# Cấp quyền cho storage và bootstrap cache
+# Cấp quyền cho storage, cache và public
 RUN chmod -R 777 storage bootstrap/cache
+RUN chmod -R 755 public public/css public/js
 
 # Cài đặt dependencies Laravel
 RUN composer install --no-dev --optimize-autoloader
@@ -41,6 +42,10 @@ RUN composer install --no-dev --optimize-autoloader
 RUN php artisan storage:link || true
 RUN php artisan key:generate
 RUN php artisan migrate --force || true
+
+# Xóa cache Laravel
+RUN php artisan config:clear
+RUN php artisan cache:clear
 
 # Mở cổng 80
 EXPOSE 80
