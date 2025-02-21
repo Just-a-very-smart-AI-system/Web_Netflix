@@ -21,9 +21,9 @@ const registerPasswordError = document.getElementById('registerPasswordError');
 const confirmPasswordError = document.getElementById('confirmPasswordError');
 
 // Định nghĩa các biến cục bộ cho các API
-const LOGIN_API_URL = 'http://127.0.0.1:8000/api/users/login';
-const REGISTER_API_URL = 'http://127.0.0.1:8000/api/users/create';
-const HOME_PAGE_API = 'http://127.0.0.1:8000/home';
+const LOGIN_API_URL = 'https://web-netflix.onrender.com/api/users/login';
+const REGISTER_API_URL = 'https://web-netflix.onrender.com/api/users/create';
+const HOME_PAGE_API = 'https://web-netflix.onrender.com/home';
 
 // Mở form đăng ký
 document.querySelector('.btn').addEventListener('click', () => {
