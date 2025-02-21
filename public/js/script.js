@@ -11,12 +11,12 @@ if (userId) {
     console.log("Không tìm thấy user_id trong URL");
 }
 
-const apiUrlFavorite = `http://127.0.0.1:8000/api/favorites/user/${userId}`;
-const apiUrlHistory = `http://127.0.0.1:8000/api/history/user/${userId}`;
-const apiCreateFavorite = 'http://127.0.0.1:8000/api/favorites/create';
-const apiCreateHistory = 'http://127.0.0.1:8000/api/history/create';
-const apiDeleteFavorite = `http://127.0.0.1:8000/api/favorites/delete`;
-const API_LOG_OUT = `http://127.0.0.1:8000/`;
+const apiUrlFavorite = `https://web-netflix.onrender.com/api/favorites/user/${userId}`;
+const apiUrlHistory = `https://web-netflix.onrender.com/api/history/user/${userId}`;
+const apiCreateFavorite = 'https://web-netflix.onrender.com/api/favorites/create';
+const apiCreateHistory = 'https://web-netflix.onrender.com/api/history/create';
+const apiDeleteFavorite = `https://web-netflix.onrender.com/api/favorites/delete`;
+const API_LOG_OUT = `https://web-netflix.onrender.com/`;
 
 loadMovies();
 
@@ -77,7 +77,7 @@ async function loadMovies() {
 }
 
 function loadAllMovies(){
-  url = 'http://127.0.0.1:8000/api/movies/all';
+  url = 'https://web-netflix.onrender.com/api/movies/all';
   return fetch(url,{
     method: 'GET',
     headers: {
