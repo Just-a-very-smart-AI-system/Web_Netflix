@@ -43,9 +43,6 @@ RUN php artisan storage:link || true
 RUN php artisan key:generate
 RUN php artisan migrate --force || true
 
-# Xóa cache Laravel
-RUN php artisan config:clear
-RUN php artisan cache:clear
 
 # Mở cổng 80
 EXPOSE 80
