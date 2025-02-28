@@ -100,4 +100,30 @@ Link: https://web-netflix.onrender.com
 - Hệ thống là một trang web xem trailer phim, có hai loại người dùng chính:
 + Người dùng (User): Có thể đăng ký, đăng nhập, xem trailer và lưu danh sách yêu thích.
 + Quản trị viên (Admin): Quản lý trailer, chỉnh sửa nội dung, xóa trailer và quản lý tài khoản người dùng.
+7.	Cách triển khai hệ thống web online
+- Render Nền tảng triển khai web:
++ Render là một nền tảng PaaS (Platform as a Service) giúp triển khai ứng dụng web một cách dễ dàng. So với các nền tảng khác như Heroku, Render cung cấp hosting miễn phí cho web services, databases và có hỗ trợ tích hợp CI/CD.
++ Mặc dù vậy Render lại không hỗ trợ trực tiếp php nên chúng ta sẽ phải cài đặt các môi trường cần thiết cho php thông quan Docker. Ở đây việc sử dụng dockerfile là 1 cách tốt nhất để render có thể hiểu và cài đặt môi trường như vendor, artisan, blade, ...
+- Lợi ích khi sử dụng Render:
++ Triển khai đơn giản: Chỉ cần push code lên GitHub, Render tự động build và deploy.
++ Hỗ trợ nhiều công nghệ: PHP, Node.js, Python, Docker, PostgreSQL, MySQL, v.v.
++ Miễn phí với tài khoản cá nhân: Render cho phép deploy miễn phí với hạn mức nhất định.
+- Cách triển khai Laravel trên Render:
++ Push mã nguồn lên GitHub.
++ Tạo một dịch vụ web mới trên Render, chọn framework PHP.
++ Cấu hình các biến môi trường (.env) như database, API keys.
++ Kết nối với database (MySQL trên Freesqldatabase hoặc PostgreSQL trên Render).
++ Render tự động build và chạy ứng dụng.
+
+8.	Công cụ lưu trữ database online- Freesqldatabase:
+- Freesqldatabase là một dịch vụ MySQL hosting miễn phí giúp lưu trữ dữ liệu mà không cần phải tự cấu hình server. Điều này rất tiện lợi khi triển khai ứng dụng trên các nền tảng như Render.
+- Sau khi đăng ký thành công, bạn sẽ nhận được các thông tin sau:
++ Hostname: (ví dụ: sql12.freesqldatabase.com)
++ Database name: (ví dụ: sql12345678)
++ Username: (ví dụ: sqluser1234)
++ Password: (được cấp khi đăng ký)
++ Port: 3306 (mặc định của MySQL)
+- Các thông tin trên sẽ được dùng để chỉnh sửa các biến môi trường liên quan đến cơ sở sữ liệu của project. Khi kết nối thành công trang web của chúng ta có thể hoạt động online một cách trơn chu và hiệu quả nhất.
+
+ 
 
