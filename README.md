@@ -1,6 +1,7 @@
 Ứng dụng xem traller trực tuyến Netflax
-
+Link: https://web-netflix.onrender.com
 1.	Giao diện trang đăng nhập
+
  
 ![image](https://github.com/user-attachments/assets/38d7c36d-8760-4d91-9cca-e77b8f529dac)
 
@@ -17,6 +18,7 @@
 + Ô nhập email có placeholder "Email address" giúp người dùng biết cần nhập gì.
 + Nút "Get Started >" màu đỏ nổi bật, kêu gọi hành động mạnh mẽ.
 2.	Đăng ký và đăng nhập
+  
  
 ![image](https://github.com/user-attachments/assets/35bfae09-98f6-4be7-a28e-503239ad5e52)
 
@@ -43,6 +45,7 @@
 - Trong phần đăng ký tài khoản cũng hoạt động tương tự với đăng nhập. Khi người dùng nhập 1 username hoặc email đã được dùng thì sẽ nhận 1 thông báo '‘trùng username hoặc email'’ và khi nhập mật khẩu không khớp cũng sẽ nhận lại 1 thông báo là '‘mật khẩu không trùng khớp'’. Điều này giúp người dùng có trải nghiệm tốt hơn và không bị trùng tài khoản với người khác.
  
 3.	Giao diện trang chủ:
+  
   ![image](https://github.com/user-attachments/assets/b38bf4c0-f904-4696-a6a2-91a86eb86cd7)
 
  
@@ -51,6 +54,7 @@
  
  
 - Khi chúng ta ấn vào nút xem trên phim thì sẽ hiển thị ra 1 cửa sổ pop-up chứa traller của phim được lấy từ youtube.
+- 
 ![image](https://github.com/user-attachments/assets/9f6c99a7-3cff-474d-a93b-63d4cab21460)
 
 4. 	Mô hình cơ sở dữ liệu
@@ -67,7 +71,9 @@
 - Mô hình cơ sở dữ liệu được thiết kế theo chuẩn hóa nhằm đảm bảo tính toàn vẹn dữ liệu, hỗ trợ mở rộng và truy vấn hiệu quả trong quá trình vận hành hệ thống.
 ![image](https://github.com/user-attachments/assets/14a9b197-9755-491d-a5f4-9434f4b641c8)
 
+
 5.	Biểu đồ hoạt động
+
  ![image](https://github.com/user-attachments/assets/7826fef1-04c5-4b1f-8554-e204e5c8cf44)
 
 -  Người dùng chọn "Tạo tài khoản".
@@ -87,7 +93,9 @@
 + Xem trailer phim.
 + Xem danh sách yêu thích và lịch sử xem
 6. Sơ đồ UseCase
- ![image](https://github.com/user-attachments/assets/ca7a9dd6-21ed-4523-b662-2c4a48b5b38f)
+  
+![image](https://github.com/user-attachments/assets/471c168e-1de5-4ce2-9d50-6bc943e8dcd0)
+
 
 - Hệ thống là một trang web xem trailer phim, có hai loại người dùng chính:
 + Người dùng (User): Có thể đăng ký, đăng nhập, xem trailer và lưu danh sách yêu thích.
