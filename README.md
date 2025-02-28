@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Ứng dụng xem traller trực tuyến Netflax
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1.	Giao diện trang đăng nhập
+ 
+![image](https://github.com/user-attachments/assets/38d7c36d-8760-4d91-9cca-e77b8f529dac)
 
-## About Laravel
+- Header (Thanh điều hướng trên cùng)
++ Logo "NETFLIX" nổi bật màu đỏ ở góc trái, giúp nhận diện thương hiệu.
++ Hai nút "Sign up" và "Sign In" ở góc phải, giúp người dùng dễ dàng đăng ký hoặc đăng nhập.
++ Nền đen giúp tạo sự tương phản với nội dung và giữ giao diện tối giản, hiện đại.
+- Phần chính (Hero Section - Phần trung tâm)
++ Hình nền là một tập hợp các poster phim nổi bật, tạo cảm giác phong phú về nội dung.
++ Tiêu đề lớn: "Unlimited movies, TV shows and more", nhấn mạnh lợi ích chính của Netflix.
++ Dòng mô tả nhỏ: "Watch anywhere. Cancel anytime.", giúp người dùng hiểu rằng dịch vụ có thể sử dụng linh hoạt.
++ Một lời kêu gọi hành động: "Ready to watch? Enter your email to create or restart your membership.", hướng người dùng đến bước đăng ký.
+- Form nhập email và nút "Get Started >"
++ Ô nhập email có placeholder "Email address" giúp người dùng biết cần nhập gì.
++ Nút "Get Started >" màu đỏ nổi bật, kêu gọi hành động mạnh mẽ.
+2.	Đăng ký và đăng nhập
+ 
+![image](https://github.com/user-attachments/assets/35bfae09-98f6-4be7-a28e-503239ad5e52)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Cấu trúc đăng nhập:
++ Email hoặc Username: Người dùng có thể nhập tài khoản của mình bằng email hoặc tên đăng nhập.
++ Mật khẩu: Dữ liệu được ẩn dưới dạng dấu • để đảm bảo bảo mật.
+- Nút hành động:
++ "Đăng Nhập" (màu đỏ) là nút chính để gửi thông tin đăng nhập.
++ "Đóng" (màu tối) giúp người dùng thoát khỏi form mà không cần đăng nhập.
+- Khi đăng nhập nếu người dùng nhập sai mật khẩu hoặc username thì sẽ được thông báo là '‘sai mật khẩu hoặc username'’. Nếu không tìm thấy username thì hiển thị thông báo '‘không tồn tại username'’.
+- Cấu trúc đăng ký:
++ Tên Người Dùng: Nhập username cá nhân.
++ Email: Địa chỉ email để liên kết tài khoản.
++ Mật khẩu: Nhập mật khẩu an toàn.
++ Nhập lại Mật khẩu: Đảm bảo người dùng nhập đúng mật khẩu mong muốn.
+-  Nút hành động:
++ "Đăng Ký" (màu đỏ) là nút chính để tạo tài khoản.
++ "Đóng" giúp thoát khỏi form mà không cần đăng ký.
+- Trong phần đăng ký tài khoản cũng hoạt động tương tự với đăng nhập. Khi người dùng nhập 1 username hoặc email đã được dùng thì sẽ nhận 1 thông báo '‘trùng username hoặc email'’ và khi nhập mật khẩu không khớp cũng sẽ nhận lại 1 thông báo là '‘mật khẩu không trùng khớp'’. Điều này giúp người dùng có trải nghiệm tốt hơn và không bị trùng tài khoản với người khác.
+ 
+3.	Giao diện trang chủ:
+  ![image](https://github.com/user-attachments/assets/b38bf4c0-f904-4696-a6a2-91a86eb86cd7)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ 
+ - Giao diện trang chủ được chia thành các thể loại phim hiển thị theo chiều ngang. Mỗi phim được thể hiện dưới dạng 1 banner của phim đó và khi người dùng di chuyển chuột vào sẽ hiện ra 1 nút xem và 1 nút trái tim để thêm vào danh sách yêu thích.
+- Các thể loại phim rất đa dạng như trending, top rate, action, adventure,… Và ở cuối trang có danh sách phim đã xem và phim yêu thích của người dùng.
+ 
+ 
+- Khi chúng ta ấn vào nút xem trên phim thì sẽ hiển thị ra 1 cửa sổ pop-up chứa traller của phim được lấy từ youtube.
+![image](https://github.com/user-attachments/assets/9f6c99a7-3cff-474d-a93b-63d4cab21460)
 
-## Laravel Sponsors
+4. 	Mô hình cơ sở dữ liệu
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+ 
+- Hệ thống cơ sở dữ liệu của dự án "Netflax" được thiết kế nhằm hỗ trợ quản lý thông tin người dùng, phim và các hoạt động tương tác của người dùng trên nền tảng. Mô hình này bao gồm các bảng chính sau:
++ users: Lưu trữ thông tin tài khoản người dùng (username, password, email).
++ movies: Chứa thông tin về các bộ phim, bao gồm tên và đường dẫn URL trailer.
++ categories: Danh mục các thể loại phim.
++ movie_category: Liên kết giữa phim và danh mục, thể hiện một bộ phim có thể thuộc nhiều thể loại.
++ history: Lưu lịch sử xem phim của người dùng.
++ favorite: Quản lý danh sách yêu thích của người dùng đối với các bộ phim.
++ sessions: Lưu trữ thông tin phiên làm việc của người dùng, phục vụ việc xác thực.
+- Mô hình cơ sở dữ liệu được thiết kế theo chuẩn hóa nhằm đảm bảo tính toàn vẹn dữ liệu, hỗ trợ mở rộng và truy vấn hiệu quả trong quá trình vận hành hệ thống.
+![image](https://github.com/user-attachments/assets/14a9b197-9755-491d-a5f4-9434f4b641c8)
 
-### Premium Partners
+5.	Biểu đồ hoạt động
+ ![image](https://github.com/user-attachments/assets/7826fef1-04c5-4b1f-8554-e204e5c8cf44)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-  Người dùng chọn "Tạo tài khoản".
++ Nhập thông tin tài khoản.
++  Hệ thống kiểm tra tài khoản đã tồn tại chưa.
+- Nếu đã tồn tại, hiển thị thông báo "Trùng tài khoản" → Quay lại bước nhập thông tin.
+- Nếu chưa tồn tại, tiếp tục bước tiếp theo.
++ Hệ thống kiểm tra mật khẩu nhập vào có đúng không.
++Nếu mật khẩu nhập lại không khớp, hiển thị thông báo lỗi "Nhập không trùng mật khẩu" → Quay lại bước nhập thông tin.
+- Nếu đúng, tài khoản được tạo thành công, chuyển đến trang chủ.
+- Người dùng chọn "Đăng nhập".
++ Nhập thông tin tài khoản (tên đăng nhập & mật khẩu).
++ Hệ thống kiểm tra thông tin đăng nhập.
+- Nếu đúng, chuyển đến trang chủ.
++ Nếu sai, hiển thị thông báo "Sai thông tin đăng nhập" → Quay lại nhập thông tin.
+- Từ trang chủ, người dùng có thể:
++ Xem trailer phim.
++ Xem danh sách yêu thích và lịch sử xem
+6. Sơ đồ UseCase
+ ![image](https://github.com/user-attachments/assets/ca7a9dd6-21ed-4523-b662-2c4a48b5b38f)
 
-## Contributing
+- Hệ thống là một trang web xem trailer phim, có hai loại người dùng chính:
++ Người dùng (User): Có thể đăng ký, đăng nhập, xem trailer và lưu danh sách yêu thích.
++ Quản trị viên (Admin): Quản lý trailer, chỉnh sửa nội dung, xóa trailer và quản lý tài khoản người dùng.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
